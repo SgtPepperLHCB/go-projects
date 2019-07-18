@@ -1,0 +1,46 @@
+---
+# tlmy/fam-out/20/0/1/0/47,               node=fam uptime
+# tlmy/fam-out/20/1/1/0/23,               node=fam lightLevel
+# tlmy/fam-out/20/2/1/0/1,                node=fam inHumidity
+# tlmy/fam-out/20/3/1/0/0,                node=fam inTemp_c
+# tlmy/fam-out/20/4/1/0/13,               node=fam distance_cm
+desc: "Family Room Sensors Telemetry"
+name: fam
+node-id: 20
+sensors:
+  - child-sensor-id: 0
+    command: 1
+    name: uptime
+    type: V_TEXT
+    type-value: 47
+    metrics_type: counter
+  - child-sensor-id: 1
+    command: 1
+    name: lightLevel
+    type: V_LIGHT_LEVEL
+    type-value: 23
+    metrics_type: gauge
+  - child-sensor-id: 2
+    command: 1
+    name: inHumidity
+    type: V_HUM
+    type-value: 1
+    metrics_type: gauge
+  - child-sensor-id: 3
+    command: 1
+    name: inTemp_c
+    type: V_TEMP
+    type-value: 0
+    metrics_type: gauge
+  - child-sensor-id: 4
+    command: 1
+    name: distance_cm
+    type: V_DISTANCE
+    type-value: 13
+    metrics_type: gauge
+  - child-sensor-id: 255
+    command: 3
+    name: discover_response
+    type: I_DISCOVER_RESPONSE
+    type-value: 21
+    metrics_type: untyped

@@ -1,0 +1,8 @@
+---
+host: master-control-program.local
+port: 1883
+topics:
+  - topic: "tlmy/fam-out/#"
+    qos: 2
+  - topic: "tlmy/gar-out/#"
+    qos: 2

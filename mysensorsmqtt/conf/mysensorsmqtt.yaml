@@ -1,0 +1,406 @@
+---
+local: true
+
+application:
+  name: mysmqtt2prompush
+
+logging:
+  log_level: INFO
+  log_format: "%(asctime)s [%(levelname)-8s][%(filename)-25s:%(lineno)-5d][%(threadName)-12s] %(message)s"
+
+mqtt:
+  host: master-control-program.local
+  port: 1883
+  topics:
+    - name: "tlmy/fam-out/#"
+      qos: 2
+    - name: "tlmy/gar-out/#"
+      qos: 2
+
+prompush:
+  host: http://192.168.1.200
+  port: 30782
+
+topic: tlmy
+gateways:
+  - name: fam-out
+    topic: "fam-out"
+  - name: gar-out
+    topic: "gar-out"
+# -
+#   name: wxm-out
+#   topic: "wxm-out"
+nodes:
+  # <topic>/<gateway>/<node-id>/<child-sensor-id>/<command>/<ack>/<type>
+  # tlmy   /fam-out  /        1/                0/        1/    0/    47
+  - # #fam-out-gateway, wxm-mobile-wx
+    # tlmy/fam-out/1/0/1/0/47,                node=wxm uptime
+    # tlmy/fam-out/1/1/1/0/23,                node=wxm lightLevel
+    # tlmy/fam-out/1/2/1/0/1,                 node=wxm outHumidity
+    # tlmy/fam-out/1/3/1/0/0,                 node=wxm outTemp_c
+    # tlmy/fam-out/1/4/1/0/4,                 node=wxm outBarometer_pa
+    # tlmy/fam-out/1/5/1/0/0,                 node=wxm extraTemp1_c
+    # tlmy/fam-out/1/6/1/0/10,                node=wxm windDir
+    # tlmy/fam-out/1/7/1/0/9,                 node=wxm windGust_mph
+    # tlmy/fam-out/1/8/1/0/10,                node=wxm windGustDir
+    # tlmy/fam-out/1/9/1/0/8,                 node=wxm windSpeed_mph
+    # tlmy/fam-out/1/10/1/0/49,               node=wxm gpsLatLngAlt
+    # tlmy/fam-out/1/11/1/0/47,               node=wxm gpsDateTime_utc
+    # tlmy/fam-out/1/12/1/0/25,               node=wxm gpsSatellites
+    desc: "Mobile Weather Station Telemetry"
+    name: wxm
+    node-id: 1
+    sensors:
+      - child-sensor-id: 0
+        command: 1
+        name: uptime
+        type: V_TEXT
+        type-value: 47
+        metrics_type: counter
+      - child-sensor-id: 1
+        command: 1
+        name: lightLevel
+        type: V_LIGHT_LEVEL
+        type-value: 23
+        metrics_type: gauge
+      - child-sensor-id: 2
+        command: 1
+        name: outHumidity
+        type: V_HUM
+        type-value: 1
+        metrics_type: gauge
+      - child-sensor-id: 3
+        command: 1
+        name: outTemp_c
+        type: V_TEMP
+        type-value: 0
+        metrics_type: gauge
+      - child-sensor-id: 4
+        command: 1
+        name: outBarometer_pa
+        type: V_PRESSURE
+        type-value: 4
+        metrics_type: gauge
+      - child-sensor-id: 5
+        command: 1
+        name: extraTemp1_c
+        type: V_TEMP
+        type-value: 0
+        metrics_type: gauge
+      - child-sensor-id: 6
+        command: 1
+        name: windDir
+        type: V_DIRECTION
+        type-value: 10
+        metrics_type: gauge
+      - child-sensor-id: 7
+        command: 1
+        name: windGust_mph
+        type: V_GUST
+        type-value: 9
+        metrics_type: gauge
+      - child-sensor-id: 8
+        command: 1
+        name: windGustDir
+        type: V_DIRECTION
+        type-value: 11
+        metrics_type: gauge
+      - child-sensor-id: 9
+        command: 1
+        name: windSpeed_mph
+        type: V_WIND
+        type-value: 8
+        metrics_type: gauge
+      - child-sensor-id: 10
+        command: 1
+        name: gpsLatLngAlt
+        type: V_POSITION
+        type-value: 49
+        metrics_type: untyped
+      - child-sensor-id: 11
+        command: 1
+        name: gpsDateTime_utc
+        type: V_TEXT
+        type-value: 47
+        metrics_type: untyped
+      - child-sensor-id: 12
+        command: 1
+        name: gpsSatellites
+        type: V_VAR2
+        type-value: 25
+        metrics_type: gauge
+      - child-sensor-id: 13
+        command: 1
+        name: rainDay
+        type: V_RATE
+        type-value: 6
+        metrics_type: gauge
+      - child-sensor-id: 14
+        command: 1
+        name: consBatteryVoltage
+        type: V_VOLTAGE
+        type-value: 38
+        metrics_type: gauge
+      - child-sensor-id: 15
+        command: 1
+        name: barometer
+        type: V_PRESSURE
+        type-value: 25
+        metrics_type: gauge
+      - child-sensor-id: 255
+        command: 3
+        name: battery_level
+        type: I_BATTERY_LEVEL
+        type-value: 0
+        metrics_type: gauge
+      - child-sensor-id: 255
+        command: 3
+        name: discover_response
+        type: I_DISCOVER_RESPONSE
+        type-value: 21
+        metrics_type: untyped
+  - # #fam-out-gateway, family-room-sensors
+    # tlmy/fam-out/20/0/1/0/47,               node=fam uptime
+    # tlmy/fam-out/20/1/1/0/23,               node=fam lightLevel
+    # tlmy/fam-out/20/2/1/0/1,                node=fam inHumidity
+    # tlmy/fam-out/20/3/1/0/0,                node=fam inTemp_c
+    # tlmy/fam-out/20/4/1/0/13,               node=fam distance_cm
+    desc: "Family Room Sensors Telemetry"
+    name: fam
+    node-id: 20
+    sensors:
+      - child-sensor-id: 0
+        command: 1
+        name: uptime
+        type: V_TEXT
+        type-value: 47
+        metrics_type: counter
+      - child-sensor-id: 1
+        command: 1
+        name: lightLevel
+        type: V_LIGHT_LEVEL
+        type-value: 23
+        metrics_type: gauge
+      - child-sensor-id: 2
+        command: 1
+        name: inHumidity
+        type: V_HUM
+        type-value: 1
+        metrics_type: gauge
+      - child-sensor-id: 3
+        command: 1
+        name: inTemp_c
+        type: V_TEMP
+        type-value: 0
+        metrics_type: gauge
+      - child-sensor-id: 4
+        command: 1
+        name: distance_cm
+        type: V_DISTANCE
+        type-value: 13
+        metrics_type: gauge
+      - child-sensor-id: 255
+        command: 3
+        name: discover_response
+        type: I_DISCOVER_RESPONSE
+        type-value: 21
+        metrics_type: untyped
+  - # #fam-out-gateway, garage-sensors
+    # tlmy/fam-out/30/0/1/0/47,               node=gar uptime
+    # tlmy/fam-out/30/1/1/0/23,               node=gar lightLevel
+    # tlmy/fam-out/30/2/1/0/4,                node=gar pressure_Pa
+    # tlmy/fam-out/30/3/1/0/0,                node=gar inTemp_c
+    # tlmy/fam-out/30/4/1/0/13,               node=gar n.distance_cm
+    # tlmy/fam-out/30/5/1/0/13,               node=gar e.distance_cm
+    # tlmy/fam-out/30/6/1/0/13,               node=gar s.distance_cm
+    # tlmy/fam-out/30/7/1/0/13,               node=gar w.distance_cm
+    # tlmy/fam-out/30/8/1/0/0,               node=gar nesw.distance_cm
+    desc: "Garage Sensors Telemetry"
+    name: gar
+    node-id: 30
+    sensors:
+      - child-sensor-id: 0
+        command: 1
+        name: uptime
+        type: V_TEXT
+        type-value: 47
+        metrics_type: counter
+      - child-sensor-id: 1
+        command: 1
+        name: lightLevel
+        type: V_LIGHT_LEVEL
+        type-value: 23
+        metrics_type: gauge
+      - child-sensor-id: 2
+        command: 1
+        name: outBarometer_pa
+        type: V_PRESSURE
+        type-value: 4
+        metrics_type: gauge
+      - child-sensor-id: 3
+        command: 1
+        name: inTemp_c
+        type: V_TEMP
+        type-value: 0
+        metrics_type: gauge
+      - child-sensor-id: 4
+        command: 1
+        name: n.distance_cm
+        type: V_DISTANCE
+        type-value: 13
+        metrics_type: gauge
+      - child-sensor-id: 5
+        command: 1
+        name: e.distance_cm
+        type: V_DISTANCE
+        type-value: 13
+        metrics_type: gauge
+      - child-sensor-id: 6
+        command: 1
+        name: s.distance_cm
+        type: V_DISTANCE
+        type-value: 13
+        metrics_type: gauge
+      - child-sensor-id: 7
+        command: 1
+        name: w.distance_cm
+        type: V_DISTANCE
+        type-value: 13
+        metrics_type: gauge
+      - child-sensor-id: 8
+        command: 1
+        name: nsew.distance_cm
+        type: V_CUSTOM
+        type-value: 13
+        metrics_type: gauge
+        #type-value: 48 #TODO
+      - child-sensor-id: 255
+        command: 3
+        name: discover_response
+        type: I_DISCOVER_RESPONSE
+        type-value: 21
+        metrics_type: untyped
+  - # #fam-out-gateway, bob
+    # tlmy/fam-out/50/0/1/0/47,               node=bob uptime
+    # tlmy/fam-out/50/1/1/0/23,               node=bob lightLevel
+    # tlmy/fam-out/50/2/1/0/1,                node=bob extraHumidity1
+    # tlmy/fam-out/50/3/1/0/0,                node=bob extraTemp1_c
+    # tlmy/fam-out/50/4/1/0/1,                node=bob extraHumidity2
+    # tlmy/fam-out/50/5/1/0/0,                node=bob extraTemp2_c
+    # tlmy/fam-out/50/6/1/0/1,                node=bob extraHumidity3
+    # tlmy/fam-out/50/7/1/0/0,                node=bob extraTemp3_c
+    # tlmy/fam-out/50/8/1/0/1,                node=bob extraHumidity4
+    # tlmy/fam-out/50/9/1/0/0,                node=bob extraTemp4_c
+    desc: "Bobiverse Telemetry"
+    name: bob
+    node-id: 50
+    sensors:
+      - child-sensor-id: 0
+        command: 1
+        name: uptime
+        type: V_TEXT
+        type-value: 47
+        metrics_type: counter
+      - child-sensor-id: 1
+        command: 1
+        name: lightLevel
+        type: V_LIGHT_LEVEL
+        type-value: 23
+        metrics_type: gauge
+      - child-sensor-id: 2
+        command: 1
+        name: extraHumidity1
+        type: V_HUM
+        type-value: 1
+        metrics_type: gauge
+      - child-sensor-id: 3
+        command: 1
+        name: extraTemp1_c
+        type: V_TEMP
+        type-value: 0
+        metrics_type: gauge
+      - child-sensor-id: 4
+        command: 1
+        name: extraHumidity2
+        type: V_HUM
+        type-value: 1
+        metrics_type: gauge
+      - child-sensor-id: 5
+        command: 1
+        name: extraTemp2_c
+        type: V_TEMP
+        type-value: 0
+        metrics_type: gauge
+      - child-sensor-id: 6
+        command: 1
+        name: extraHumidity3
+        type: V_HUM
+        type-value: 1
+        metrics_type: gauge
+      - child-sensor-id: 7
+        command: 1
+        name: extraTemp3_c
+        type: V_TEMP
+        type-value: 0
+        metrics_type: gauge
+      - child-sensor-id: 8
+        command: 1
+        name: extraHumidity4
+        type: V_HUM
+        type-value: 1
+        metrics_type: gauge
+      - child-sensor-id: 9
+        command: 1
+        name: extraTemp4_c
+        type: V_TEMP
+        type-value: 0
+        metrics_type: gauge
+      - child-sensor-id: 255
+        command: 3
+        name: discover_response
+        type: I_DISCOVER_RESPONSE
+        type-value: 21
+        metrics_type: untyped
+  - # #fam-out-gateway, hvac
+    # tlmy/fam-out/90/0/1/0/47,               node=hvac uptime
+    # tlmy/fam-out/90/1/1/0/0,                node=hvac inTemp_c
+    # tlmy/fam-out/90/2/1/0/0,                node=hvac extraTemp1_c
+    # tlmy/fam-out/90/3/1/0/0,                node=hvac extraTemp2_c
+    # tlmy/fam-out/90/4/1/0/0,                node=hvac extraTemp3_c
+    desc: "HVAC Telemetry"
+    name: hvac
+    node-id: 90
+    sensors:
+      - child-sensor-id: 0
+        command: 1
+        name: uptime
+        type: V_TEXT
+        type-value: 47
+        metrics_type: counter
+      - #ambient
+        child-sensor-id: 1
+        command: 1
+        name: extraTemp1_c
+        type: V_TEMP
+        type-value: 0
+        metrics_type: gauge
+      - #motor
+        child-sensor-id: 2
+        command: 1
+        name: extraTemp2_c
+        type: V_TEMP
+        type-value: 0
+        metrics_type: gauge
+      - #vent
+        child-sensor-id: 3
+        command: 1
+        name: extraTemp3_c
+        type: V_TEMP
+        type-value: 0
+        metrics_type: gauge
+      - child-sensor-id: 255
+        command: 3
+        name: discover_response
+        type: I_DISCOVER_RESPONSE
+        type-value: 21
+        metrics_type: untyped

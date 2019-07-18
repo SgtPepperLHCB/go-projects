@@ -1,0 +1,33 @@
+STARTUP
+=======
+tlmy/gateway/node /child/cmd  /ack  /type             payload
+===============   ====  ====  ===   ==============    ==========
+tlmy/gar-out/20   /255  /0    /0    /17               2.1.0-beta
+                        pres  norm  S_ARDUINO_NODE
+
+tlmy/gar-out/20   /255  /3    /0    /6                0
+                        int   norm  I_ID_REQUEST
+
+tlmy/gar-out/20   /255  /3    /0    /11               n20-fam
+                        int   norm  I_SKETCH_NAME   
+
+tlmy/gar-out/20   /255  /3    /0    /12               0.1
+                        int   norm  I_SKETCH_VERSION
+
+tlmy/gar-out/20   /0    /0    /0    /36                 
+                        pres  norm  S_INFO
+tlmy/gar-out/20   /2    /0    /0    /7
+                        pres  norm  S_HUM
+tlmy/gar-out/20   /3    /0    /0    /6
+                        pres  norm  S_TEMP
+
+tlmy/gar-out/20   /0    /1    /0    /47               0
+                        set   norm  V_TEXT              uptime
+tlmy/gar-out/20   /3    /1    /0    /0                17.6
+                        set   norm  V_TEMP              extraTemp1
+tlmy/gar-out/20   /2    /1    /0    /1                35.7
+                        set   norm  V_HUM               extraHumidity1
+tlmy/gar-out/20   /4    /1    /0    /13               79.0
+                        set   norm  V_DISTANCE          distance
+tlmy/gar-out/20   /1    /1    /0    /23               1.0
+                        set   norm  V_LIGHT_LEVEL       light_level

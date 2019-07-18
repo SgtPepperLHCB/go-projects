@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+rm -vf *_string.go
+
+stringer -type AckTypeIn acktype.go
+stringer -type AckTypeOut acktype.go
+stringer -type CommandType commandtype.go
+stringer -type InternalType internaltype.go
+stringer -type Node node.go
+stringer -type PresentationType presentationtype.go
+stringer -type SetReqType setreqtype.go
+stringer -type StreamType streamtype.go
